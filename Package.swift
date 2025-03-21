@@ -9,8 +9,8 @@ let package = Package(
   products: [
     // Products define the executables and libraries a package produces, making them visible to other packages.
     .library(
-      name: "swiftui-persistent-control",
-      targets: ["swiftui-persistent-control"])
+      name: "SwiftUIPersistentControl",
+      targets: ["SwiftUIPersistentControl"])
   ],
   dependencies: [
     .package(url: "https://github.com/FluidGroup/swiftui-scrollview-interoperable-drag-gesture", from: "0.2.1")
@@ -19,14 +19,14 @@ let package = Package(
     // Targets are the basic building blocks of a package, defining a module or a test suite.
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
-      name: "swiftui-persistent-control",
+      name: "SwiftUIPersistentControl",
       dependencies: [
         .product(name: "SwiftUIScrollViewInteroperableDragGesture", package: "swiftui-scrollview-interoperable-drag-gesture")
       ]
     ),
     .testTarget(
       name: "swiftui-persistent-controlTests",
-      dependencies: ["swiftui-persistent-control"]
+      dependencies: ["SwiftUIPersistentControl"]
     ),
   ]
 )
