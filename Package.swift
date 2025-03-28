@@ -25,7 +25,7 @@ let package = Package(
       ]
     ),
     .testTarget(
-      name: "swiftui-persistent-controlTests",
+      name: "SwiftUIPersistentControlTests",
       dependencies: ["SwiftUIPersistentControl"]
     ),
   ]
