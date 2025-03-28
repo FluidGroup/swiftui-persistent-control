@@ -7,19 +7,27 @@ public struct Container<
   DetailBackground: View
 >: View {
   
-  @State private var isCompact = true
-  @Namespace private var namespace
+  private let namespace: Namespace.ID
+  
+  @Binding private var isCompact: Bool
   @State private var offset: CGFloat = 0
   
   private let compactContent: CompactContent
   private let detailContent: DetailContent
   private let detailBackground: DetailBackground
+  private let marginToBottom: CGFloat
   
-  public init(
+  public init(    
+    isCompact: Binding<Bool>,
+    namespace: Namespace.ID,
+    marginToBottom: CGFloat = 0,
     @ViewBuilder compactContent: () -> CompactContent,
     @ViewBuilder detailContent: () -> DetailContent,
     @ViewBuilder detailBackground: () -> DetailBackground
   ) {
+    self._isCompact = isCompact
+    self.namespace = namespace
+    self.marginToBottom = marginToBottom
     self.compactContent = compactContent()
     self.detailContent = detailContent()
     self.detailBackground = detailBackground()
@@ -42,6 +50,7 @@ public struct Container<
             compactContent
           }
           .padding(.horizontal)
+          .padding(.bottom, marginToBottom)
           
         } else {
           DetailContainer(
@@ -84,16 +93,18 @@ public struct Container<
     var body: some View {
       
       content
+        .frame(
+          maxWidth: .infinity
+        )
         .background(
           RoundedRectangle(cornerRadius: 20, style: .continuous)
             .fill(.background)
             .matchedGeometryEffect(id: "frame", in: namespace)
             .shadow(
-              color: .init(white: 0, opacity: 0.2),
-              radius: 10
+              color: .init(white: 0, opacity: 0.1),
+              radius: 8
             )
-        )
-        .frame(height: 60)
+        )        
         .animation(
           .bouncy,
           body: { view in
