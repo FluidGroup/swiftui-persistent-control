@@ -41,10 +41,8 @@ public struct Container<
           CompactContainer(
             namespace: namespace,
             onActivate: {              
-              withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
-                offset = 0
-                isCompact.toggle()
-              }
+              offset = 0
+              isCompact.toggle()
             }
           ) {
             compactContent
@@ -56,9 +54,7 @@ public struct Container<
           DetailContainer(
             namespace: namespace, offset: $offset,
             onDeactivate: {
-              withAnimation(.spring(response: 0.4, dampingFraction: 1)) {
-                isCompact = true
-              }
+              isCompact = true
             },
             content: {
               detailContent
@@ -68,7 +64,8 @@ public struct Container<
           )
           
         }
-      }
+      }      
+      .animation(.spring(response: 0.4, dampingFraction: 1), value: isCompact)      
     }
   }
   
@@ -243,7 +240,11 @@ public struct Container<
                 let initialVelocity = Double(velocity / distance)
                 withAnimation(.interpolatingSpring(initialVelocity: initialVelocity)) {
                   offset = UIScreen.main.bounds.height
+                } completion: {
+                  // TODO: supports more intruption cases
+                  offset = 0
                 }
+
                 onDismiss()
               } else {
                 withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
