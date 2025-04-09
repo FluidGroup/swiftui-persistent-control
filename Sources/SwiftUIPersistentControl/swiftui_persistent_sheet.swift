@@ -157,7 +157,14 @@ public struct Container<
                 trailing: -safeAreaInsets.trailing
               )
             )
-          content
+          VStack {
+                          
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Material.regular)
+              .frame(width: 36, height: 6)            
+            
+            content
+          }
         }
         .matchedGeometryEffect(id: "frame", in: namespace)
         .mask(
@@ -208,6 +215,49 @@ public struct Container<
     func body(content: Content) -> some View {
       content
         .offset(y: offset)
+      /*
+        .gesture(DragGesture(minimumDistance: 0)
+          .onChanged { value in
+            
+            print(value.translation.height)
+            // for better fps
+            withAnimation(.snappy(duration: 0.05)) {
+              offset = value.translation.height
+              
+              if value.translation.height > 0 {                
+                isScrollLockEnabled = true
+              } else {
+                isScrollLockEnabled = false
+                offset = 0
+              }
+              
+            }
+          }
+          .onEnded { value in
+            
+            print("===\n===\n===\n===\n===\n===\n")
+            
+            let velocity = value.velocity.height
+            
+            if velocity > velocityThreshold || offset > dismissThreshold {
+              let distance = UIScreen.main.bounds.height - offset
+              let initialVelocity = Double(velocity / distance)
+              withAnimation(.interpolatingSpring(initialVelocity: initialVelocity)) {
+                offset = UIScreen.main.bounds.height
+              } completion: {
+                // TODO: supports more intruption cases
+                offset = 0
+              }
+              
+              onDismiss()
+            } else {
+              withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                offset = 0
+              }
+            }
+          }
+        )
+       */
         .gesture(
           ScrollViewInteroperableDragGesture(
             configuration: .init(
@@ -218,6 +268,8 @@ public struct Container<
             isScrollLockEnabled: $isScrollLockEnabled,
             coordinateSpaceInDragging: .global,
             onChange: { value in
+              
+              print(value.translation.height)
               // for better fps
               withAnimation(.snappy(duration: 0.05)) {
                 offset = value.translation.height
@@ -233,6 +285,9 @@ public struct Container<
               
             },
             onEnd: { value in
+              
+              print("===\n===\n===\n===\n===\n===\n")
+              
               let velocity = value.velocity.height
               
               if velocity > velocityThreshold || offset > dismissThreshold {

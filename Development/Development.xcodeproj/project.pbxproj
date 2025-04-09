@@ -215,6 +215,7 @@
 			packageReferences = (
 				4B9236DB2D8D50E3008629B6 /* XCRemoteSwiftPackageReference "swift-storybook" */,
 				4B9236F72D8D56C8008629B6 /* XCLocalSwiftPackageReference "../../swiftui-persistent-control" */,
+				4B07BDE22DA55D4A0086DE57 /* XCLocalSwiftPackageReference "../submodule/FluidGroup/swiftui-scrollview-interoperable-drag-gesture" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4B9236AC2D8D504C008629B6 /* Products */;
@@ -581,6 +582,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		4B07BDE22DA55D4A0086DE57 /* XCLocalSwiftPackageReference "../submodule/FluidGroup/swiftui-scrollview-interoperable-drag-gesture" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../submodule/FluidGroup/swiftui-scrollview-interoperable-drag-gesture";
+		};
 		4B9236F72D8D56C8008629B6 /* XCLocalSwiftPackageReference "../../swiftui-persistent-control" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../swiftui-persistent-control";

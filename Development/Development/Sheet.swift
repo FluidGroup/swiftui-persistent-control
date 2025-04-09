@@ -4,9 +4,12 @@ import SwiftUIPersistentControl
 private struct _Book: View {
   
   @Namespace private var namespace
+  @State private var isCompact: Bool = true
   
   var body: some View {
     Container(
+      isCompact: $isCompact,
+      namespace: namespace,
       compactContent: {
         CompactContentView(namespace: namespace)
       },
@@ -30,6 +33,7 @@ private struct CompactContentView: View {
       RoundedRectangle(cornerRadius: 10, style: .continuous)
         .fill(Color.red)
         .aspectRatio(1, contentMode: .fit)
+        .frame(width: 60)
         .matchedGeometryEffect(id: "art", in: namespace)
       Text("コンテンツ")
         .font(.headline)

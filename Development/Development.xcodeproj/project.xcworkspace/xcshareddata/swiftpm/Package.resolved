@@ -1,5 +1,5 @@
 {
-  "originHash" : "b28840dfae9f58086177b319483ceabe6d0a80f11de5b3d4b776b0becf68f683",
+  "originHash" : "3108adf9cba966aaee51ef827b8149e2fbc1510410d1295722dcb9e095e27a60",
   "pins" : [
     {
       "identity" : "descriptors",
@@ -35,15 +35,6 @@
       "state" : {
         "revision" : "0687f71944021d616d34d922343dcef086855920",
         "version" : "600.0.1"
-      }
-    },
-    {
-      "identity" : "swiftui-scrollview-interoperable-drag-gesture",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/FluidGroup/swiftui-scrollview-interoperable-drag-gesture",
-      "state" : {
-        "revision" : "60054ac27fcd856c212afba4ca177f44881a5036",
-        "version" : "0.2.1"
       }
     },
     {

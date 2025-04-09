@@ -12,9 +12,12 @@ import SwiftUIPersistentControl
 struct ContentView: View {
   
   @Namespace private var namespace
+  @State var isCompact: Bool = true
   
   var body: some View {
     Container(
+      isCompact: $isCompact,
+      namespace: namespace,
       compactContent: {
         CompactContentView(namespace: namespace)
       },
@@ -32,9 +35,12 @@ struct ContentView: View {
 private struct _Book: View {
   
   @Namespace private var namespace
+  @State var isCompact: Bool = true
   
   var body: some View {
     Container(
+      isCompact: $isCompact,
+      namespace: namespace,
       compactContent: {
         CompactContentView(namespace: namespace)
       },
@@ -57,8 +63,9 @@ private struct CompactContentView: View {
     HStack {
       RoundedRectangle(cornerRadius: 10, style: .continuous)
         .fill(Color.red)
-        .aspectRatio(1, contentMode: .fit)
         .matchedGeometryEffect(id: "art", in: namespace)
+        .aspectRatio(1, contentMode: .fit)
+        .frame(width: 60)
       Text("コンテンツ")
         .font(.headline)
       Spacer()
@@ -76,7 +83,7 @@ private struct DetailContentView: View {
   }
   
   let namespace: Namespace.ID
-  @State private var mode: Mode = .list
+  @State private var mode: Mode = .current
   @State var safeAreaInsets: EdgeInsets = .init()
   
   var body: some View {
