@@ -111,6 +111,19 @@ private struct DetailContentView: View {
               .foregroundColor(.white)
               .font(.headline)
               .matchedGeometryEffect(id: "text", in: namespace)
+            ScrollView(.horizontal) { 
+              HStack(spacing: 12) {
+                
+                Rectangle()
+                  .fill(Color.primary)
+                  .frame(width: 200, height: 60)
+                                  
+                Rectangle()
+                  .fill(Color.primary)
+                  .frame(width: 200, height: 60)
+                
+              }
+            }
             Spacer()
           }
         case .list:
