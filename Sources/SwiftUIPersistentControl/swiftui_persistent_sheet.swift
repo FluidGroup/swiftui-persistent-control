@@ -238,7 +238,7 @@ public struct Container<
           
           //              print(value.translation.height)
           // for better fps
-          withAnimation(.snappy(duration: 0.05)) {
+          withAnimation(.spring(duration: 0.11, bounce: 0, blendDuration: 0)) {
             offset = value.translation.height
             
             if value.translation.height > 0 {                
