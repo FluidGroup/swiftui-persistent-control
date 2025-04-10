@@ -214,12 +214,6 @@ public struct Container<
         
     func body(content: Content) -> some View {
       content
-        .onChange(of: offset, initial: true, { oldValue, newValue in
-          let diff = oldValue - newValue
-          if diff < -10 {
-            print(diff)
-          }
-        })
         .offset(y: offset)
 //        .gesture(classicGesture)
         .gesture(modernGesture)
@@ -281,7 +275,6 @@ public struct Container<
       DragGesture(minimumDistance: 0)
         .onChanged { value in
           
-          print(value.translation.height)
           // for better fps
           withAnimation(.snappy(duration: 0.05)) {
             offset = value.translation.height
