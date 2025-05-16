@@ -94,7 +94,7 @@ public struct Container<
           maxWidth: .infinity
         )
         .background(
-          RoundedRectangle(cornerRadius: 20, style: .continuous)
+          RoundedRectangle(cornerRadius: 16, style: .continuous)
             .fill(.background)
             .matchedGeometryEffect(id: "frame", in: namespace)
             .shadow(
