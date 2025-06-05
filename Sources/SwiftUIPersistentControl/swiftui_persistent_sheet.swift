@@ -3,6 +3,7 @@ internal import SwiftUIScrollViewInteroperableDragGesture
 
 public struct Container<
   CompactContent: View,
+  CompactBackground: View,
   DetailContent: View,
   DetailBackground: View
 >: View {
@@ -13,6 +14,7 @@ public struct Container<
   @State private var offset: CGFloat = 0
   
   private let compactContent: CompactContent
+  private let compactBackground: CompactBackground
   private let detailContent: DetailContent
   private let detailBackground: DetailBackground
   private let marginToBottom: CGFloat
@@ -22,6 +24,7 @@ public struct Container<
     namespace: Namespace.ID,
     marginToBottom: CGFloat = 0,
     @ViewBuilder compactContent: () -> CompactContent,
+    @ViewBuilder compactBackground: () -> CompactBackground,
     @ViewBuilder detailContent: () -> DetailContent,
     @ViewBuilder detailBackground: () -> DetailBackground
   ) {
@@ -29,6 +32,7 @@ public struct Container<
     self.namespace = namespace
     self.marginToBottom = marginToBottom
     self.compactContent = compactContent()
+    self.compactBackground = compactBackground()
     self.detailContent = detailContent()
     self.detailBackground = detailBackground()
   }
@@ -46,6 +50,8 @@ public struct Container<
             }
           ) {
             compactContent
+          } background: {
+            compactBackground
           }
           .padding(.horizontal)
           .padding(.bottom, marginToBottom)
@@ -69,10 +75,11 @@ public struct Container<
     }
   }
   
-  struct CompactContainer<Content: View>: View {
+  struct CompactContainer<Content: View, Background: View>: View {
     
     let namespace: Namespace.ID
     let content: Content
+    let background: Background
     
     @State private var isPressing: Bool = false
     private let onActivate: () -> Void
@@ -80,11 +87,13 @@ public struct Container<
     init(
       namespace: Namespace.ID,
       onActivate: @escaping () -> Void,
-      @ViewBuilder content: () -> Content
+      @ViewBuilder content: () -> Content,
+      @ViewBuilder background: () -> Background
     ) {
       self.namespace = namespace
       self.onActivate = onActivate
       self.content = content()
+      self.background = background()
     }
     
     var body: some View {
@@ -94,13 +103,8 @@ public struct Container<
           maxWidth: .infinity
         )
         .background(
-          RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(.background)
-            .matchedGeometryEffect(id: "frame", in: namespace)
-            .shadow(
-              color: .init(white: 0, opacity: 0.1),
-              radius: 8
-            )
+          background                      
+            .matchedGeometryEffect(id: "frame", in: namespace)            
         )        
         .animation(
           .bouncy,
